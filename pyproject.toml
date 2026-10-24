@@ -13,7 +13,7 @@ dependencies = []
 
 [project.optional-dependencies]
 bpe = ["tiktoken==0.14.0"]
-dev = ["pytest==8.4.2", "ruff==0.14.1"]
+dev = ["pytest==9.1.1", "ruff==0.14.1"]
 board = ["matplotlib==3.9.2"]
 
 [project.scripts]
