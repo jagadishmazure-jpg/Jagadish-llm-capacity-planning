@@ -1,0 +1,37 @@
+[build-system]
+requires = ["setuptools>=69"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "llm-capacity-planning"
+version = "0.1.0"
+description = "Plan LLM capacity and cost from tokens per second, not requests per second: token counter, workload profiles, cost model, capacity planner, incident simulator and measured fixes"
+requires-python = ">=3.11"
+license = { text = "MIT" }
+readme = "README.md"
+dependencies = []
+
+[project.optional-dependencies]
+bpe = ["tiktoken==0.14.0"]
+dev = ["pytest==8.4.2", "ruff==0.14.1"]
+
+[project.scripts]
+capplan = "capplan.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.ruff]
+line-length = 140
+target-version = "py311"
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I", "B", "UP", "S"]
+ignore = ["S101", "S311", "B008"]
+
+[tool.ruff.lint.per-file-ignores]
+"tests/*" = ["S"]
+"scripts/*" = ["S603", "S607", "E501"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
