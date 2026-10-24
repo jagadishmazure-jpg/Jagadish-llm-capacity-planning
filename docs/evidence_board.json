@@ -1,0 +1,101 @@
+{
+  "note": "Copied from results.json. (a)-(c) simulated; (d) inputs measured with the offline counter, outputs sampled; the 80x line is quoted from the talk. Prices illustrative 2026-10 (illustrative).",
+  "a_share_sweep": [
+    {
+      "contract_share_pct": 0,
+      "bill_multiplier": 1.0,
+      "replicas": 3
+    },
+    {
+      "contract_share_pct": 2,
+      "bill_multiplier": 5.8,
+      "replicas": 9
+    },
+    {
+      "contract_share_pct": 5,
+      "bill_multiplier": 12.8,
+      "replicas": 20
+    },
+    {
+      "contract_share_pct": 10,
+      "bill_multiplier": 24.0,
+      "replicas": 39
+    },
+    {
+      "contract_share_pct": 12,
+      "bill_multiplier": 29.2,
+      "replicas": 47
+    },
+    {
+      "contract_share_pct": 20,
+      "bill_multiplier": 47.4,
+      "replicas": 77
+    },
+    {
+      "contract_share_pct": 30,
+      "bill_multiplier": 71.1,
+      "replicas": 117
+    },
+    {
+      "contract_share_pct": 40,
+      "bill_multiplier": 94.0,
+      "replicas": 154
+    }
+  ],
+  "a_quoted_talk_multiplier": 80,
+  "b_chat_p99_s": {
+    "1_launch": 2.499,
+    "2_incident": 611.189,
+    "3_incident_token_planned_fleet": 2.418,
+    "5_fair_share_only": 90.301,
+    "6_caps_plus_fair_share": 3.732,
+    "8_all_fixes": 7.067,
+    "9_caps_on_replanned_fleet": 5.351
+  },
+  "b_replicas": {
+    "1_launch": 3,
+    "2_incident": 3,
+    "3_incident_token_planned_fleet": 47,
+    "5_fair_share_only": 3,
+    "6_caps_plus_fair_share": 3,
+    "8_all_fixes": 3,
+    "9_caps_on_replanned_fleet": 5
+  },
+  "c_monthly_api_usd": {
+    "1_launch": 16198.34,
+    "2_incident": 519079.47,
+    "3_incident_token_planned_fleet": 519079.47,
+    "5_fair_share_only": 519079.47,
+    "6_caps_plus_fair_share": 77567.16,
+    "8_all_fixes": 47159.86,
+    "9_caps_on_replanned_fleet": 77567.16
+  },
+  "c_month": {
+    "estimate_usd": 16101.04,
+    "without_fixes_usd": 398601.36,
+    "multiplier": 24.8,
+    "drift_alert_day": 2
+  },
+  "d_exercise": {
+    "chat": {
+      "avg_input_tokens": 9.2,
+      "avg_output_tokens": 33.5,
+      "output_share_of_cost_pct": 91.6
+    },
+    "contract_qa": {
+      "avg_input_tokens": 4613.8,
+      "avg_output_tokens": 447.3,
+      "output_share_of_cost_pct": 22.5
+    },
+    "code_gen": {
+      "avg_input_tokens": 1008.4,
+      "avg_output_tokens": 708.4,
+      "output_share_of_cost_pct": 67.8
+    },
+    "summarization": {
+      "avg_input_tokens": 3220.8,
+      "avg_output_tokens": 267.7,
+      "output_share_of_cost_pct": 20.0
+    }
+  }
+}

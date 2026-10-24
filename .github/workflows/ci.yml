@@ -30,6 +30,8 @@ jobs:
         run: capplan bench --check results.json
       - name: README and docs numbers match
         run: python scripts/render_docs.py --check
+      - name: Evidence board numbers match results.json (and the figure renders)
+        run: pip install -e ".[board]" && python scripts/evidence_board.py --check
       - name: Brand check (hashed blocklist)
         run: python scripts/check_brands.py
 
