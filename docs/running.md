@@ -24,6 +24,7 @@ python scripts/count_tests.py
 | `capplan bench --write results.json` / `--check results.json` | Regenerate or verify every number |
 | `capplan charts` | Regenerate `docs/charts/*.svg` from `results.json` |
 | `capplan demo` | Baseline examples and two plans |
+| `capplan hosting [--assumptions F] [--json \| --write F \| --check F]` | Hosting economics from labelled assumptions ([hosting-economics.md](hosting-economics.md)) |
 
 Named mixes: `launch_estimate` (chat only), `month_after` (88% chat, 12% whole contracts),
 `code_assistant`, `doc_summarizer`. Profiles for custom mixes: `chat`, `contract_qa`, `code_gen`, `summarization`.
@@ -33,7 +34,8 @@ Named mixes: `launch_estimate` (chat only), `month_after` (88% chat, 12% whole c
 ```bash
 capplan bench --write results.json     # about 15 s
 capplan charts
-python scripts/render_docs.py          # README, docs/results.md, docs/exercise.md
+capplan hosting --write docs/hosting_results.json
+python scripts/render_docs.py          # README, docs/results.md, docs/exercise.md, docs/hosting-economics.md
 python scripts/render_docs.py --check  # what CI runs
 ```
 

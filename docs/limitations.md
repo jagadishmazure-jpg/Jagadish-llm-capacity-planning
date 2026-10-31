@@ -25,3 +25,9 @@
   network time, autoscaling delays, retries.
 - All tests are regression checks on synthetic data written alongside the code; they show the code
   does what it says, not that the numbers match any real deployment.
+- **Hosting economics uses example inputs.** GPU rental, server, colocation and ops prices are made-up
+  examples. Only server power, electricity prices and one PUE
+  are dated reference figures. Throughput is one number per GPU, power draw is linear between idle and maximum,
+  and site conversion cost, reserved or spot discounts, failures and resale are not modelled. The halving
+  what-if holds coin price, hashrate and fees fixed. See [hosting-economics.md](hosting-economics.md#limitations).
+

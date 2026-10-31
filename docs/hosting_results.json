@@ -1,0 +1,190 @@
+{
+ "api_blended_usd_per_m": 0.7,
+ "utilisation": 0.6,
+ "options": [
+  {
+   "name": "cloud_on_demand",
+   "label": "(a) Cloud GPU, on demand",
+   "gpus": 8,
+   "monthly_usd": 24860.0,
+   "parts_usd": {
+    "gpu_rental": 23360.0,
+    "other": 1500.0
+   },
+   "usd_per_gpu_hour": 4.2568,
+   "usd_per_useful_gpu_hour": 7.0947,
+   "tokens_per_month_b": 31.536,
+   "usd_per_m_tokens": 0.7883,
+   "vs_api": 1.126,
+   "break_even_utilisation": 0.6757,
+   "payback_months_vs_api": null,
+   "facility_kw": null,
+   "racks": null
+  },
+  {
+   "name": "colo_converted_site",
+   "label": "(b) Colocation at a converted power site",
+   "gpus": 8,
+   "monthly_usd": 11972.61,
+   "parts_usd": {
+    "capex": 7548.02,
+    "electricity": 496.59,
+    "colocation": 1428.0,
+    "ops": 2500.0
+   },
+   "usd_per_gpu_hour": 2.0501,
+   "usd_per_useful_gpu_hour": 3.4168,
+   "tokens_per_month_b": 31.536,
+   "usd_per_m_tokens": 0.3796,
+   "vs_api": 0.542,
+   "break_even_utilisation": 0.3221,
+   "payback_months_vs_api": 17.0,
+   "facility_kw": 9.435,
+   "racks": 1
+  },
+  {
+   "name": "onprem_small_server",
+   "label": "(c) On-prem small NVIDIA server, bought once",
+   "gpus": 4,
+   "monthly_usd": 2896.1,
+   "parts_usd": {
+    "capex": 1940.17,
+    "electricity": 355.93,
+    "colocation": 0.0,
+    "ops": 600.0
+   },
+   "usd_per_gpu_hour": 0.9918,
+   "usd_per_useful_gpu_hour": 1.653,
+   "tokens_per_month_b": 7.569,
+   "usd_per_m_tokens": 0.3826,
+   "vs_api": 0.547,
+   "break_even_utilisation": 0.3169,
+   "payback_months_vs_api": 13.8,
+   "facility_kw": 3.37,
+   "racks": 1
+  }
+ ],
+ "cheapest_per_token": "colo_converted_site",
+ "utilisation_sweep": {
+  "utilisation": [
+   0.1,
+   0.2,
+   0.3,
+   0.4,
+   0.5,
+   0.6,
+   0.7,
+   0.8,
+   0.9,
+   1.0
+  ],
+  "cloud_on_demand": [
+   4.7298,
+   2.3649,
+   1.5766,
+   1.1825,
+   0.946,
+   0.7883,
+   0.6757,
+   0.5912,
+   0.5255,
+   0.473
+  ],
+  "colo_converted_site": [
+   2.2364,
+   1.1223,
+   0.751,
+   0.5653,
+   0.4539,
+   0.3796,
+   0.3266,
+   0.2868,
+   0.2559,
+   0.2311
+  ],
+  "onprem_small_server": [
+   2.1587,
+   1.0931,
+   0.7379,
+   0.5603,
+   0.4537,
+   0.3826,
+   0.3319,
+   0.2938,
+   0.2642,
+   0.2406
+  ]
+ },
+ "electricity_sweep": [
+  {
+   "usd_per_kwh": 0.04,
+   "colo_converted_site": 0.3726,
+   "onprem_small_server": 0.3486
+  },
+  {
+   "usd_per_kwh": 0.0721,
+   "colo_converted_site": 0.3796,
+   "onprem_small_server": 0.359
+  },
+  {
+   "usd_per_kwh": 0.1,
+   "colo_converted_site": 0.3857,
+   "onprem_small_server": 0.3681
+  },
+  {
+   "usd_per_kwh": 0.1447,
+   "colo_converted_site": 0.3955,
+   "onprem_small_server": 0.3826
+  },
+  {
+   "usd_per_kwh": 0.2,
+   "colo_converted_site": 0.4076,
+   "onprem_small_server": 0.4006
+  },
+  {
+   "usd_per_kwh": 0.3,
+   "colo_converted_site": 0.4294,
+   "onprem_small_server": 0.4331
+  }
+ ],
+ "site_option": "colo_converted_site",
+ "site_capacity": {
+  "site_power_mw": 20.0,
+  "it_mw": 16.0,
+  "servers": 1568,
+  "gpus": 12544,
+  "racks": 523,
+  "tokens_per_month_b": 49448.4,
+  "tokens_per_month_b_per_mw": 2472.42
+ },
+ "halving_what_if": {
+  "per_mw_facility_power_per_month": true,
+  "electricity_usd_per_kwh": 0.0721,
+  "hashrate_ph_s": 52.91,
+  "mining_revenue_now_usd": 72421,
+  "mining_revenue_after_subsidy_halves_usd": 38021,
+  "power_cost_usd": 52633,
+  "mining_margin_now_usd": 19788,
+  "mining_margin_after_usd": -14612,
+  "hosting_colo_revenue_usd": 112000,
+  "breakeven_hashprice_after_usd_per_ph_day": 62.29
+ },
+ "reference_values": [
+  {
+   "field": "options.colo_converted_site.it_kw_per_server",
+   "as_of": "2024-04"
+  },
+  {
+   "field": "options.colo_converted_site.electricity_usd_per_kwh",
+   "as_of": "2026-08"
+  },
+  {
+   "field": "options.onprem_small_server.pue",
+   "as_of": "2024"
+  },
+  {
+   "field": "options.onprem_small_server.electricity_usd_per_kwh",
+   "as_of": "2026-08"
+  }
+ ]
+}

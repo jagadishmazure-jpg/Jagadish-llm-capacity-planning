@@ -7,6 +7,7 @@ capplan simulate --mix month_after [--fixes]
 capplan bench [--write results.json | --check results.json]
 capplan charts                          regenerate docs/charts/*.svg
 capplan demo
+capplan hosting [--assumptions assumptions/hosting.yaml] [--json] [--write F | --check F]
 """
 
 from __future__ import annotations
@@ -105,6 +106,52 @@ def _charts(results: dict, out: Path) -> list[Path]:
     return files
 
 
+def _money(x: float) -> str:
+    return f"-${-x:,.0f}" if x < 0 else f"${x:,.0f}"
+
+
+def _hosting(a) -> int:
+    from . import hosting
+
+    r = hosting.report(hosting.load(a.assumptions))
+    if a.check:
+        old = json.loads(Path(a.check).read_text())
+        if old != json.loads(json.dumps(r)):
+            diff = [k for k in r if json.loads(json.dumps(r[k])) != old.get(k)]
+            print(f"hosting results differ from {a.check} in: {diff}", file=sys.stderr)
+            return 1
+        print(f"hosting matches {a.check}")
+        return 0
+    if a.write:
+        Path(a.write).write_text(json.dumps(r, indent=1) + "\n")
+        print(f"wrote {a.write}")
+        return 0
+    if a.json:
+        print(json.dumps(r, indent=2))
+        return 0
+    print(f"Example assumptions, utilisation {r['utilisation']:.0%}, API blended price ${r['api_blended_usd_per_m']}/M tokens")
+    print(f"{'option':<45} {'$/month':>9} {'$/GPU-h':>8} {'$/M tok':>8} {'vs API':>7} {'break-even util':>16} {'payback':>9}")
+    for o in r["options"]:
+        be = "never" if o["break_even_utilisation"] is None else f"{o['break_even_utilisation']:.0%}"
+        pb = "-" if o["payback_months_vs_api"] is None else f"{o['payback_months_vs_api']} mo"
+        print(
+            f"{o['label']:<45} {_money(o['monthly_usd']):>9} {o['usd_per_gpu_hour']:>8.2f} {o['usd_per_m_tokens']:>8.4f} "
+            f"{o['vs_api']:>6.2f}x {be:>16} {pb:>9}"
+        )
+    s = r["site_capacity"]
+    print(
+        f"\nSite power ceiling ({r['site_option']}): {s['site_power_mw']} MW -> {s['it_mw']} MW IT -> {s['servers']:,} servers, "
+        f"{s['gpus']:,} GPUs, {s['tokens_per_month_b']:,} B tokens/month"
+    )
+    h = r["halving_what_if"]
+    print(
+        f"Halving what-if per MW (mechanical, not a forecast): mining margin {_money(h['mining_margin_now_usd'])} -> "
+        f"{_money(h['mining_margin_after_usd'])}/month; colocation revenue {_money(h['hosting_colo_revenue_usd'])}/month"
+    )
+    print("All inputs are labelled examples or dated reference figures; this is not investment advice.")
+    return 0
+
+
 def main(argv: list[str] | None = None) -> int:
     ap = argparse.ArgumentParser(prog="capplan", description="Plan LLM capacity and cost from tokens, not requests.")
     sub = ap.add_subparsers(dest="cmd", required=True)
@@ -133,6 +180,12 @@ def main(argv: list[str] | None = None) -> int:
     g.add_argument("--check")
     sub.add_parser("charts")
     sub.add_parser("demo")
+    h = sub.add_parser("hosting", help="power-constrained hosting economics: cloud vs colocation vs on-prem vs API")
+    h.add_argument("--assumptions", default=None, help="YAML of labelled assumptions (default: assumptions/hosting.yaml)")
+    hg = h.add_mutually_exclusive_group()
+    hg.add_argument("--json", action="store_true")
+    hg.add_argument("--write")
+    hg.add_argument("--check")
     a = ap.parse_args(argv)
     try:
         if a.cmd == "count":
@@ -142,6 +195,12 @@ def main(argv: list[str] | None = None) -> int:
             return 0
         if a.cmd == "estimate":
             return _estimate(a)
+        if a.cmd == "hosting":
+            if a.assumptions is None:
+                from .hosting import DEFAULT_ASSUMPTIONS
+
+                a.assumptions = DEFAULT_ASSUMPTIONS
+            return _hosting(a)
         if a.cmd == "simulate":
             extra = {"caps": CapPolicy(), "fair_share": True} if a.fixes else {}
             r = run(Config(rps=a.rps, mix=_mix(a.mix), replicas=a.replicas, duration_s=a.duration, **extra))

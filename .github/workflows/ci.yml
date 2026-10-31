@@ -28,6 +28,8 @@ jobs:
         run: capplan demo
       - name: Deterministic benchmark numbers match results.json
         run: capplan bench --check results.json
+      - name: Hosting economics numbers match docs/hosting_results.json
+        run: capplan hosting && capplan hosting --check docs/hosting_results.json
       - name: README and docs numbers match
         run: python scripts/render_docs.py --check
       - name: Evidence board numbers match results.json (and the figure renders)

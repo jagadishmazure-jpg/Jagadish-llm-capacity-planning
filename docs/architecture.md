@@ -31,6 +31,7 @@ flowchart TB
 | `fixes.py` | Token bucket, caps with retrieval, tenant budget, drift monitor, FIFO and fair-share queues |
 | `simulator.py` | Discrete-time fleet simulation with admission controls |
 | `bench.py` | Every number in the docs |
+| `hosting.py` | Power-constrained hosting economics from `assumptions/hosting.yaml`: cloud vs colocation vs on-prem vs API, break-even, payback, site power ceiling, halving what-if ([hosting-economics.md](hosting-economics.md)) |
 | `cli.py` | `capplan` |
 
 ## How the planner works, step by step

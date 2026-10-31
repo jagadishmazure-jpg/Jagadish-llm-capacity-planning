@@ -21,6 +21,16 @@ Scope: an LLM-backed service planned with this repo, and the repo's own tooling.
 | Denial of service | Few users, giant prompts, flat RPS | Token-based admission and fair share |
 | Elevation of privilege | Tenant bypasses budget via another tenant's key | Budgets keyed on authenticated tenant |
 
+## Hosting economics calculator (STRIDE)
+
+| Threat | Example | Mitigation |
+| --- | --- | --- |
+| Tampering | An edited YAML makes one option look cheap with an unlabelled or impossible number | Every number needs a basis; reference numbers need an as-of date; range checks; strict keys |
+| Tampering | A malicious YAML tries to build Python objects | `yaml.safe_load` only |
+| Repudiation | "Where did this price come from?" | The report lists every reference value and as-of date; everything else is marked example |
+| Information disclosure | Real vendor quotes committed by mistake | Keep private quotes in a local copy (`--assumptions my.yaml`); the committed file holds examples only |
+| Misuse of output | Example tables read as investment advice or price forecasts | Every page and the CLI say simulated, not advice; the halving section changes one input mechanically; a test bans price-target language in the YAML |
+
 ## Repo tooling
 
 No secrets, no network, no cloud resources. gitleaks over full history, CodeQL, Dependabot, pinned
