@@ -24,7 +24,7 @@ def _check(name: str, value: float) -> float:
 
 @dataclass(frozen=True)
 class Prices:
-    """US dollars per million tokens. Output defaults to 3x input, as in the talk."""
+    """US dollars per million tokens. Output defaults to 3x input."""
 
     input_per_m: float = 0.50
     output_per_m: float = 1.50

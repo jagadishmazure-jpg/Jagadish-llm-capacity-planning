@@ -16,7 +16,7 @@
   "hourly_usd": 2.5,
   "kv_capacity_tokens": 427246
  },
- "talk_examples": {
+ "baseline_examples": {
   "small_request_usd": 5.5e-05,
   "large_request_usd": 0.0055,
   "large_over_small": 100.0,

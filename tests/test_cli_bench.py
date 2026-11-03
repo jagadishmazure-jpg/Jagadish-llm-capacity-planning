@@ -39,8 +39,8 @@ def test_simulate_short(capsys):
     assert json.loads(capsys.readouterr().out)["served"] > 0
 
 
-def test_talk_examples():
-    t = bench.talk_examples()
+def test_baseline_examples():
+    t = bench.baseline_examples()
     assert t["large_over_small"] == 100.0 and t["input_tokens_per_s_at_100rps_4000in"] == 400_000
 
 
@@ -52,7 +52,7 @@ def test_exercise_has_four_scenarios():
 
 def test_committed_results_have_expected_sections():
     r = json.loads((ROOT / "results.json").read_text())
-    for k in ("talk_examples", "workloads", "capacity_plans", "scenarios", "month", "exercise", "share_sweep"):
+    for k in ("baseline_examples", "workloads", "capacity_plans", "scenarios", "month", "exercise", "share_sweep"):
         assert k in r
 
 

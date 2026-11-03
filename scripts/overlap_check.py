@@ -1,7 +1,7 @@
 """8-word overlap check: fail if any run of 8 consecutive words in the repo's text also appears in a
-source text (for example a talk transcript). The source itself is never committed.
+reference text. The reference text itself is never committed.
 
-python scripts/overlap_check.py /path/to/source.txt
+python scripts/overlap_check.py /path/to/reference.txt
 """
 
 from __future__ import annotations
@@ -36,7 +36,7 @@ def main(argv: list[str]) -> int:
         for g in grams((root / f).read_text(errors="ignore")) & src:
             hits += 1
             print(f"{f}: {' '.join(g)}")
-    print(f"8-word overlaps with source: {hits}")
+    print(f"8-word overlaps with reference: {hits}")
     return 1 if hits else 0
 
 

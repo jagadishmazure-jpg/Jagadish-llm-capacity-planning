@@ -23,7 +23,7 @@ python scripts/count_tests.py
 | `capplan simulate --mix NAME [--replicas N --duration S --fixes]` | Run the fleet simulator |
 | `capplan bench --write results.json` / `--check results.json` | Regenerate or verify every number |
 | `capplan charts` | Regenerate `docs/charts/*.svg` from `results.json` |
-| `capplan demo` | The talk's examples and two plans |
+| `capplan demo` | Baseline examples and two plans |
 
 Named mixes: `launch_estimate` (chat only), `month_after` (88% chat, 12% whole contracts),
 `code_assistant`, `doc_summarizer`. Profiles for custom mixes: `chat`, `contract_qa`, `code_gen`, `summarization`.

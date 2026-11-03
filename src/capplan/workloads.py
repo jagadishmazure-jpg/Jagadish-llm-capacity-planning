@@ -2,7 +2,7 @@
 
 Each profile draws input and output token counts from a clipped log-normal distribution.
 The shapes are assumptions for a fictional legal-help chatbot (Kestrel Lane Software's
-"Brightdesk"), chosen to resemble the talk's scenario; they are not measured from real traffic.
+"Brightdesk"), chosen to resemble the incident scenario; they are not measured from real traffic.
 """
 
 from __future__ import annotations

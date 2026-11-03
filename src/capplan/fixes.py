@@ -1,4 +1,4 @@
-"""The fixes from the talk, as small composable parts.
+"""The fixes, as small composable parts.
 
 * ``TokenBucket`` - rate limit in tokens per second, per user and globally.
 * ``cap_request`` - input size cap: oversized documents go through retrieval (top-k chunks) instead

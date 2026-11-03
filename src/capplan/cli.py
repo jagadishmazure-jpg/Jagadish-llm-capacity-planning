@@ -173,8 +173,8 @@ def main(argv: list[str] | None = None) -> int:
             print(f"wrote {f}")
         return 0
     if a.cmd == "demo":
-        print("Talk example: 20 in / 30 out vs 8,000 in / 1,000 out")
-        print(json.dumps(bench.talk_examples(), indent=2))
+        print("Baseline example: 20 in / 30 out vs 8,000 in / 1,000 out")
+        print(json.dumps(bench.baseline_examples(), indent=2))
         for m in ("launch_estimate", "month_after"):
             print(f"\n== {m} ==")
             _estimate(

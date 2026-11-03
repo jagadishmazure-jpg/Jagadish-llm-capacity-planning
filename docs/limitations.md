@@ -4,7 +4,7 @@
   assumptions. Absolute dollars and seconds are illustrative; ratios between scenarios are the point.
 - **The 80x is not reproduced.** With a 12% share of whole-contract requests the measured bill
   multiplier is 32x (29.2x in the planner's sample). The share sweep shows 80x needs roughly 30-40%
-  whole-contract traffic in this model. We did not tune the mix to hit the talk's number.
+  whole-contract traffic in this model. We did not tune the mix to hit the incident's 80x.
 - **p99 depends on run length.** In the incident the queue grows without bound, so the measured p99
   (613 s over a 60 s burst) would be larger for a longer burst. It is a symptom of overload, not a
   steady-state figure.

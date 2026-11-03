@@ -5,11 +5,11 @@ import pytest
 from capplan.cost import SECONDS_PER_MONTH, Prices, monthly_cost, request_cost, tokens_per_second
 
 
-def test_talk_small_request():
+def test_baseline_small_request():
     assert request_cost(20, 30) == pytest.approx(0.000055)
 
 
-def test_talk_large_request_is_100x():
+def test_baseline_large_request_is_100x():
     assert request_cost(8000, 1000) / request_cost(20, 30) == pytest.approx(100)
 
 
@@ -18,7 +18,7 @@ def test_output_priced_3x_input_by_default():
     assert p.output_per_m == 3 * p.input_per_m
 
 
-def test_tokens_per_second_talk_example():
+def test_tokens_per_second_baseline_example():
     assert tokens_per_second(100, 4000, 500) == (400_000, 50_000)
 
 

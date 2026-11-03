@@ -1,6 +1,6 @@
-# The talk's exercise, done
+# The measurement exercise, done
 
-The talk asks viewers to pick three or four kinds of request, measure average input and output tokens
+The exercise is to pick three or four kinds of request, measure average input and output tokens
 for each, and draw a bar or frequency chart to see why each product needs its own estimate.
 
 Method (`bench.exercise()`):

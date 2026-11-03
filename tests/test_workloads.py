@@ -19,7 +19,7 @@ def test_contract_qa_reaches_90k():
     assert max(r.input_tokens for r in w.sample_mix({"contract_qa": 1.0}, 5000)) == 90_000
 
 
-def test_chat_matches_talk_short_request():
+def test_chat_matches_baseline_short_request():
     s = w.stats([r.input_tokens for r in w.sample_mix({"chat": 1.0}, 5000)])
     assert 15 <= s["p50"] <= 25
 

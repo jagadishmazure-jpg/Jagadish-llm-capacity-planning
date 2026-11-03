@@ -16,7 +16,7 @@ PLAN_SAMPLE = 20_000
 REQ_PER_DAY = 100 * 86_400
 
 
-def talk_examples() -> dict:
+def baseline_examples() -> dict:
     p = Prices()
     small = request_cost(20, 30, p)
     big = request_cost(8_000, 1_000, p)
@@ -54,7 +54,7 @@ def capacity_plans() -> dict:
 
 
 def exercise() -> dict:
-    """The talk's homework: average input and output tokens for a few kinds of request."""
+    """The measurement exercise: average input and output tokens for a few kinds of request."""
     rng = random.Random(21)
     texts = {
         "chat": [corpus.chat_message(rng) for _ in range(300)],
@@ -186,7 +186,7 @@ def all_results() -> dict:
     return {
         "prices": asdict(Prices()),
         "hardware": {**asdict(Hardware()), "kv_capacity_tokens": Hardware().kv_capacity_tokens},
-        "talk_examples": talk_examples(),
+        "baseline_examples": baseline_examples(),
         "ratio_study_approx": ratio_study(False),
         "workloads": workload_profiles(),
         "hist_bins": BIN_LABELS,

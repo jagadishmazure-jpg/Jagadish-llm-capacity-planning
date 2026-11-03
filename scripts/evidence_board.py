@@ -5,7 +5,7 @@ python scripts/evidence_board.py --check  # re-renders to a temp file; fails if 
 
 Labels: panels (a)-(c) are simulated (seeded fleet simulator and planner, illustrative prices). Panel (d) input
 tokens are measured with the offline token counter on synthetic texts; outputs are sampled from the profiles.
-The 80x reference line is quoted from the source talk, for comparison only. PNG bytes vary by font and
+The 80x reference line is the incident's stated figure, for comparison only. PNG bytes vary by font and
 platform, so the JSON is what CI compares. Needs the optional "board" extra (matplotlib).
 """
 
@@ -19,7 +19,7 @@ ROOT = Path(__file__).resolve().parents[1]
 RESULTS = ROOT / "results.json"
 PNG = ROOT / "docs/img/evidence_board.png"
 JSON = ROOT / "docs/evidence_board.json"
-QUOTED_TALK_BILL_MULTIPLIER = 80  # the talk's figure, shown as a reference line only
+INCIDENT_BILL_MULTIPLIER = 80  # the incident's stated figure, reference line only
 SCENARIOS = {
     "1_launch": "1\nlaunch",
     "2_incident": "2\nincident",
@@ -37,9 +37,9 @@ def numbers(r: dict | None = None) -> dict:
     m = r["month"]
     return {
         "note": "Copied from results.json. (a)-(c) simulated; (d) inputs measured with the offline counter, "
-        "outputs sampled; the 80x line is quoted from the talk. Prices illustrative " + r["prices"]["as_of"] + ".",
+        "outputs sampled; the 80x line is the incident's stated figure. Prices illustrative " + r["prices"]["as_of"] + ".",
         "a_share_sweep": [{k: p[k] for k in ("contract_share_pct", "bill_multiplier", "replicas")} for p in r["share_sweep"]],
-        "a_quoted_talk_multiplier": QUOTED_TALK_BILL_MULTIPLIER,
+        "a_incident_multiplier": INCIDENT_BILL_MULTIPLIER,
         "b_chat_p99_s": {k: runs[k]["chat_latency_s"]["p99"] for k in SCENARIOS},
         "b_replicas": {k: runs[k]["replicas"] for k in SCENARIOS},
         "c_monthly_api_usd": {k: runs[k]["monthly_api_usd"] for k in SCENARIOS},
@@ -84,7 +84,7 @@ def draw(n: dict, path: Path) -> None:
             xytext=(-10, 8),
             fontsize=8,
         )
-    ax[0, 0].axhline(n["a_quoted_talk_multiplier"], color="grey", linestyle="--", label=f"talk's {n['a_quoted_talk_multiplier']}x (quoted)")
+    ax[0, 0].axhline(n["a_incident_multiplier"], color="grey", linestyle="--", label=f"incident {n['a_incident_multiplier']}x (stated)")
     ax[0, 0].set_xlabel("% of requests that paste a whole contract")
     ax[0, 0].set_ylabel("monthly bill vs launch estimate")
     ax[0, 0].legend(fontsize=8, loc="upper left")

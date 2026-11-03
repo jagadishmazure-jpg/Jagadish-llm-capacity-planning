@@ -34,7 +34,7 @@ def money(x: float) -> str:
 
 
 def block(r: dict, tests: int) -> str:
-    t, s, m = r["talk_examples"], r["scenarios"], r["month"]
+    t, s, m = r["baseline_examples"], r["scenarios"], r["month"]
     runs = s["runs"]
     rows = []
     for k, label in LABELS.items():
@@ -62,14 +62,14 @@ def block(r: dict, tests: int) -> str:
 simulations and checked in CI against `results.json`. The models, GPUs and prices are simulated or
 illustrative; the point is the method and the ratios, not the dollar amounts.
 
-**The talk's arithmetic, recomputed.** 20 in / 30 out costs ${t["small_request_usd"]:.6f}; 8,000 in / 1,000 out costs
+**The baseline arithmetic.** 20 in / 30 out costs ${t["small_request_usd"]:.6f}; 8,000 in / 1,000 out costs
 ${t["large_request_usd"]:.4f}, **{t["large_over_small"]}x** more. 100 RPS x 4,000 input = {t["input_tokens_per_s_at_100rps_4000in"]:,.0f} input
 tokens/s and x 500 output = {t["output_tokens_per_s_at_100rps_500out"]:,.0f} output tokens/s.
 
 **The incident, reproduced (60 s of traffic at 100 RPS, measured, not forced).** Same request rate, same users,
 average input up **{s["incident_avg_input_multiplier"]}x**, monthly bill up **{s["incident_bill_multiplier"]}x**, p99 latency up
 **{s["incident_p99_multiplier"]}x** (from {runs["1_launch"]["latency_s"]["p99"]} s to {runs["2_incident"]["latency_s"]["p99"]} s, a
-queue that keeps growing for as long as the mix stays shifted). The talk's 80x needs about 30-40% whole-contract
+queue that keeps growing for as long as the mix stays shifted). The incident's 80x needs about 30-40% whole-contract
 traffic in this model: {sweep}.
 
 | Scenario | Replicas | Avg input tokens | Monthly API bill | p99 all (s) | Chat p50 / p99 (s) | Rejected by token limits |
@@ -88,7 +88,7 @@ the spend alerts fire at 50% on day {ga["50"]}, 80% on day {ga["80"]} and 100% o
 {", ".join(f"{k} on day {v}" for k, v in m["tenant_hard_stop_day"].items())} while {", ".join(m["tenants_never_stopped"])} never stop.
 Without any fix the month would cost {money(m["month_bill_usd_without_fixes"])}, **{m["month_bill_multiplier"]}x** the estimate.
 
-**The talk's exercise** (inputs measured with the offline token counter on synthetic texts; outputs sampled from the profiles):
+**The measurement exercise** (inputs measured with the offline token counter on synthetic texts; outputs sampled from the profiles):
 
 | Request type | Requests | Avg input | Avg output | p99 input | Avg cost | Output share of cost |
 | --- | --- | --- | --- | --- | --- | --- |

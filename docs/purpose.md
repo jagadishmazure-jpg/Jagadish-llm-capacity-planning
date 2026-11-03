@@ -13,9 +13,9 @@ second can need thousands of times more compute, memory and money.
 - SRE and platform teams who need limits and alerts that catch a change in request size, not just volume.
 - Interviewers and candidates working through LLM system design questions.
 
-## The source scenario, in our own words
+## The scenario
 
-A public system design talk (AI system design series, episode on rate limiting) describes a support
+Consider a support
 chatbot that was fixed after an earlier incident and relaunched. A month later two things had gone
 wrong. The invoice was roughly eighty times the forecast, and the slowest one percent of ordinary
 requests now took about thirty seconds instead of under half a second. Nothing obvious had changed:
@@ -27,7 +27,7 @@ chat. After the relaunch some people pasted entire contracts and asked questions
 few requests carried around ninety thousand input tokens and the average grew into the thousands.
 The team's estimate had assumed short chats and so did its limits.
 
-The talk's lessons, restated:
+The lessons:
 
 1. The unit of work is the token. Words are a poor proxy and requests are a worse one.
 2. Input and output tokens are different work. The prompt is processed in one parallel pass
@@ -41,10 +41,10 @@ The talk's lessons, restated:
    4,000 input tokens is 400,000 input tokens per second, and with 500 average output tokens it is
    50,000 output tokens per second.
 5. Different products have different token shapes (chat, code generation, summarisation), so each
-   needs its own estimate. The talk asks viewers to measure average input and output tokens for a
+   needs its own estimate. The exercise is to measure average input and output tokens for a
    few request types and chart them; [exercise.md](exercise.md) does that.
 
 ## What this repo adds
 
-The talk gives the reasoning; this repo turns it into code you can run, with distributions and
+This repo turns the reasoning into code you can run, with distributions and
 tails instead of averages, a simulator that shows how latency collapses, and measured fixes.

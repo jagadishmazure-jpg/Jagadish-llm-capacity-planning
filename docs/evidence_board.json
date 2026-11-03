@@ -1,5 +1,5 @@
 {
-  "note": "Copied from results.json. (a)-(c) simulated; (d) inputs measured with the offline counter, outputs sampled; the 80x line is quoted from the talk. Prices illustrative 2026-10 (illustrative).",
+  "note": "Copied from results.json. (a)-(c) simulated; (d) inputs measured with the offline counter, outputs sampled; the 80x line is the incident's stated figure. Prices illustrative 2026-10 (illustrative).",
   "a_share_sweep": [
     {
       "contract_share_pct": 0,
@@ -42,7 +42,7 @@
       "replicas": 154
     }
   ],
-  "a_quoted_talk_multiplier": 80,
+  "a_incident_multiplier": 80,
   "b_chat_p99_s": {
     "1_launch": 2.499,
     "2_incident": 611.189,
