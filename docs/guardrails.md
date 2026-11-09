@@ -24,3 +24,10 @@ Exact figures are in the generated results table in the README.
   being regenerated, and if docs drift from it.
 - No network calls, no credentials, no cloud resources. gitleaks scans full history; a hashed
   brand blocklist keeps real company names out.
+
+## Hosting assumptions
+
+`hosting.load` uses `yaml.safe_load` only. It rejects bare (unlabelled) numbers, unknown or missing keys,
+non-finite and out-of-range values, and `reference` numbers without an `as_of` date.
+The CLI exits 2 with the reason. CI fails if the generated hosting tables drift from a fresh run.
+

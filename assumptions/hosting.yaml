@@ -1,0 +1,85 @@
+# Power-constrained AI hosting economics: example assumptions.
+#
+# Every number has a basis:
+#   example  a made-up but plausible figure. Replace it with your own quote or measurement.
+#   reference  a typical published industry figure, with an as-of date. Check it against your own quote.
+# Nothing here is a price quote, a forecast or investment advice. There is no Bitcoin price anywhere.
+# The loader (src/capplan/hosting.py) rejects unknown keys, missing labels and out-of-range values.
+
+hours_per_month: {value: 730, basis: example, note: "8,760 hours a year / 12"}
+utilisation: {value: 0.6, basis: example, note: "share of provisioned GPU time doing useful work"}
+
+api:
+  input_usd_per_m: {value: 0.50, basis: example, note: "same illustrative fictional-model price as cost.py"}
+  output_usd_per_m: {value: 1.50, basis: example, note: "output priced 3x input, as in cost.py"}
+  output_token_share: {value: 0.2, basis: example, note: "share of all tokens that are output tokens"}
+
+options:
+  cloud_on_demand:
+    label: "(a) Cloud GPU, on demand"
+    kind: cloud
+    gpus: {value: 8, basis: example}
+    usd_per_gpu_hour: {value: 4.00, basis: example, note: "on-demand list prices vary a lot by provider, region and GPU; use your own"}
+    billed_hours_fraction: {value: 1.0, basis: example, note: "1.0 = always on; set it to the utilisation if you truly scale to zero"}
+    other_usd_per_month: {value: 1500, basis: example, note: "storage, egress, support plan"}
+    tokens_per_s_per_gpu: {value: 2500, basis: example, note: "blended input+output tokens/s at full load; measure with a load test"}
+
+  colo_converted_site:
+    label: "(b) Colocation at a converted power site"
+    kind: owned
+    gpus_per_server: {value: 8, basis: example}
+    servers: {value: 1, basis: example}
+    server_capex_usd: {value: 300000, basis: example, note: "8-GPU server, delivered and installed"}
+    amortisation_years: {value: 4, basis: example}
+    cost_of_capital: {value: 0.08, basis: example, note: "yearly rate used to annuitise the purchase"}
+    it_kw_per_server:
+      value: 10.2
+      basis: reference
+      as_of: "2024-04"
+      note: "typical published maximum system power of an 8-GPU H100-class server"
+    idle_draw_fraction: {value: 0.35, basis: example, note: "power drawn at zero load, as a share of max"}
+    pue: {value: 1.25, basis: example, note: "power usage effectiveness of the converted site (facility kW / IT kW)"}
+    electricity_usd_per_kwh:
+      value: 0.0721
+      basis: reference
+      as_of: "2026-08"
+      note: "published U.S. state industrial average retail price, 7.21 cents/kWh (preliminary)"
+    colo_usd_per_kw_month: {value: 140, basis: example, note: "space, cooling and power delivery, charged per contracted IT kW; power itself passed through"}
+    ops_usd_per_month: {value: 2500, basis: example, note: "remote hands, network, monitoring"}
+    tokens_per_s_per_gpu: {value: 2500, basis: example}
+    rack_kw_limit: {value: 40, basis: example, note: "the power one rack at the site can deliver and cool"}
+
+  onprem_small_server:
+    label: "(c) On-prem small NVIDIA server, bought once"
+    kind: owned
+    gpus_per_server: {value: 4, basis: example}
+    servers: {value: 1, basis: example}
+    server_capex_usd: {value: 60000, basis: example, note: "one-time purchase of a small 4-GPU server"}
+    amortisation_years: {value: 3, basis: example}
+    cost_of_capital: {value: 0.08, basis: example}
+    it_kw_per_server: {value: 3.0, basis: example}
+    idle_draw_fraction: {value: 0.30, basis: example}
+    pue:
+      value: 1.56
+      basis: reference
+      as_of: "2024"
+      note: "published industry-average data-centre PUE; used as a stand-in for a small server room"
+    electricity_usd_per_kwh:
+      value: 0.1447
+      basis: reference
+      as_of: "2026-08"
+      note: "published U.S. commercial average retail price, 14.47 cents/kWh (preliminary)"
+    colo_usd_per_kw_month: {value: 0, basis: example, note: "in your own building, so no colocation fee"}
+    ops_usd_per_month: {value: 600, basis: example, note: "part of one admin's time, spares, internet"}
+    tokens_per_s_per_gpu: {value: 1200, basis: example, note: "smaller GPUs serving a smaller model"}
+    rack_kw_limit: {value: 8, basis: example, note: "an office server-room rack"}
+
+site:
+  power_mw: {value: 20, basis: example, note: "grid connection of a converted site, in MW of facility power"}
+
+halving:
+  # A mechanical what-if for a mining site deciding whether to convert. Not a forecast of anything.
+  hashprice_usd_per_ph_day: {value: 45, basis: example, note: "revenue per PH/s per day today; an input, not a prediction"}
+  fleet_efficiency_j_per_th: {value: 18, basis: example}
+  fee_share_of_revenue: {value: 0.05, basis: example, note: "share of mining revenue from fees, which do not halve"}
+  mining_pue: {value: 1.05, basis: example}

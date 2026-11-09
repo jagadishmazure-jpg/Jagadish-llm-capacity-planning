@@ -9,7 +9,7 @@ description = "Plan LLM capacity and cost from tokens per second, not requests p
 requires-python = ">=3.11"
 license = { text = "MIT" }
 readme = "README.md"
-dependencies = []
+dependencies = ["pyyaml==6.0.3"]
 
 [project.optional-dependencies]
 bpe = ["tiktoken==0.14.0"]

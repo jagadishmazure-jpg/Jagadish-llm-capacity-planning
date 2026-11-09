@@ -54,3 +54,17 @@ capplan estimate --rps 100 --mix chat=0.7,summarization=0.2,code_gen=0.1 \
 
 - Replay a day of real token counts through `simulator.run` with your `Hardware`.
 - Calibrate against a load test on a real serving engine before trusting the absolute numbers.
+
+## 8. Rent, buy or pay per token (hosting economics)
+
+- Copy `assumptions/hosting.yaml` to a private file and replace every `example` with your own quotes:
+  GPU rental, server price, colocation $/kW-month, ops, and **measured** tokens/s per GPU from a load
+  test. Keep the labels. Mark a figure `reference` only with an as-of date, and check it against your own quote.
+- Run `capplan hosting --assumptions my.yaml` and look at break-even utilisation first. Then check
+  your real utilisation from GPU metrics, not from the plan.
+- For owned options, check payback months against the hardware's useful life and your contract length.
+- If you need more than a few servers, ask about power before price: available MW, PUE, rack kW limit
+  and lead time for the grid connection. Use `site_capacity` to see how many GPUs the connection allows.
+- Follow the decision flowchart in [hosting-economics.md](hosting-economics.md). Re-run every quarter,
+  because prices and utilisation move.
+

@@ -19,3 +19,15 @@
   per-tenant fairness hurt that tenant's own chat users.
 - **What would you not claim?** That the dollar figures are real: the hardware and prices are
   simulated. The ratios and the method are the result.
+- **Rent, buy or pay per token?** (example inputs) Owned hardware beats a $0.70/M blended API only
+  above about 32% utilisation; always-on cloud GPUs need about 68%. Below that, pay per token.
+- **Is power the bottleneck or the cost?** Both, in different ways. Moving electricity from $0.04 to
+  $0.30/kWh changes colocation cost per token by about 15%. But a 20 MW connection caps the site at
+  12,544 GPUs whatever the budget. PUE decides how much of that connection reaches the GPUs.
+- **Why are mining sites converting?** They already have the grid connection, which is the slow part.
+  In a mechanical halving what-if (subsidy halves, everything else fixed) the example mining margin per
+  MW turns negative, while colocation on the same MW earns more before conversion cost. That is not a
+  forecast and not investment advice.
+- **How do you keep a cost model honest?** Every input is labelled `example` or `reference` with an
+  as-of date, and the loader refuses anything else.
+
